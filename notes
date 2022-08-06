@@ -1,1 +1,84 @@
-test.
+
+INTRODUCTION: 
+
+    Sumologic is a cloud data analytics platform that focuses on security, operations, business intelligence use cases. 
+    It provides elastic processing to collect, manage and analyze log data regardless of volume, type and location.
+    It provides real time insights into online operations and customer behaviour.
+
+
+DATA COLLECTION: 
+
+    COLLECTOR: 
+
+        Installed Collector - Agent is installed on host. 
+        Hosted Collector - Agentless based on HTTP & S3 bucket. 
+
+    SOURCE: 
+
+        Multipls sources can be added to collector from local/remote file to syslogs and docker logs. 
+
+    METADATA: 
+
+        Used to filter the logs based on metadata.
+
+        _collector              name of collector 
+        _sourceCategory         Category of source which used to search logs. 
+        _source                 name of source like localfile 
+        _sourceName             Name of log file 
+        _sourceHost             Host name of source. 
+
+        _messageTime 
+        _messageCount 
+        _size 
+        _raw 
+
+
+DATA INGESTION: 
+
+    INGEST BUDGETS:
+
+        It controls the amount of flow of log data to sumo.
+        Scope is used to attach this ingest budget.
+
+    DATA TIERS BASICS:
+
+        Continuos   -   For prod 
+        Frequent    -   For dev/test
+        Infrequent  -   For infrequent and hard to reproduce cases and capture os/syslogs etc. 
+
+    Process to setup frequent or infrequent data tier: 
+
+        1. In collector, fields/metadata add tier=infrequent/frequent
+        2. Under logs, partition, create "partition" and update the routing expression.
+        3. Under logs, add the "Field extraction rules".
+
+
+DATA MONITORING: 
+
+    ALERT RESPONSE:
+
+        Identify root cause using context cards.
+        Under monitoring, can setup a new alerts.
+        Also can integrate with slack channel.
+
+    CONTEXT CARDS:
+
+        It provides additional insight information that system automtically identified by analyzing the data.
+
+
+OPTIMIZATION SETUP:
+
+    Field based - Field extraction Rules
+    Index based - Partition & Scheduled views
+
+    FER - It process during data inject time (pre process) or run time. 
+
+    Scheduled views - Subsets of data that create a pre aggregated index. pre aggregate data during data ingestion.
+
+    Data retention default - 30 days, min - 1 day, max - 5000 days. It is setup at partition or scheduled views. 
+
+
+
+
+
+
